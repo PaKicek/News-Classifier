@@ -215,7 +215,7 @@ public class NewsItem {
 
     /**
      * Check if this news item has all required fields
-     * @return true if has title and link
+     * @return true if it has title and link
      */
     public boolean isValid() {
         return getTitle() != null && !getTitle().isEmpty() &&
