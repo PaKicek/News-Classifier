@@ -6,6 +6,7 @@ import org.pakicek.model.NewsItem;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class CsvWriter {
             System.out.println("No data to write");
             return;
         }
+        Collections.shuffle(newsItems);
 
         try (CSVWriter writer = new CSVWriter(
                 new FileWriter(filename, StandardCharsets.UTF_8),
