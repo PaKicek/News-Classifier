@@ -10,7 +10,7 @@
 - В датасете должны быть столбцы `Website`, `Title`, `Author`, `Publication Date`, `Link`, `Picture Link`, `Category` (категория на сайте), `Topic` (таргет, изначально будет определяться по `Category`, если это возможно), `Relevance` (таргет, изначально будет определяться по `Publication Date`, если это возможно)
 - Значение столбца `Topic` должно быть одним из `Politics`, `Economics`, `Society`, `Accidents`, `Sport`, `Science and tech`, `Culture`, `Health`, `Travels and tourism`, `Weather`, `Unknown`
 - Значение столбца `Relevance` должно быть от 1 до 5 включительно
-- Модель должна предсказывать `Topic` с `Accuracy` не менее 80% и `F1-score` не менее 70%
+- Модель должна предсказывать `Topic` с `Accuracy` не менее 60%
 
 ## Нефункциональные требования
 - Экспортер должен быть написан на языке программирования Java

@@ -160,9 +160,9 @@ public class NewsItem {
 
     // Determine topic from category
     private void determineTopicFromCategory() {
-        this.topic = Topic.determineFromString(category);
+        this.topic = Topic.determineFromString(title);
         if (this.topic == Topic.UNKNOWN) {
-            this.topic = Topic.determineFromString(title);
+            this.topic = Topic.determineFromString(category);
         }
     }
 
