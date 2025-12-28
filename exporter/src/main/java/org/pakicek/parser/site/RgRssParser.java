@@ -37,7 +37,7 @@ public class RgRssParser extends BaseRssParser {
 
                 if (statusCode != 200) {
                     // RG might return 403/406 without proper headers
-                    String errorMessage = "HTTP " + statusCode + " for Rossiyskaya Gazeta";
+                    String errorMessage = "HTTP " + statusCode + " for RG";
 
                     // Provide helpful suggestions based on status code
                     if (statusCode == 403) {
