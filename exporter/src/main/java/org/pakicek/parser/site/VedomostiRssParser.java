@@ -66,7 +66,6 @@ public class VedomostiRssParser extends MultiFeedRssParser {
 
             newsItem.setLink(getElementText(itemElement, "link"));
 
-            // Extract category from URL or XML
             String category = getElementText(itemElement, "category");
             if (category.isEmpty()) {
                 category = extractCategoryFromUrl();
@@ -90,7 +89,6 @@ public class VedomostiRssParser extends MultiFeedRssParser {
     private String extractCategoryFromUrl() {
         if (rssUrl.contains("/rubric/")) {
             String category = rssUrl.substring(rssUrl.lastIndexOf("/rubric/") + 8);
-            // Convert to readable name
             return switch (category) {
                 case "business" -> "Бизнес";
                 case "economics" -> "Экономика";

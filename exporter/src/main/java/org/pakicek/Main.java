@@ -8,9 +8,6 @@ import org.pakicek.writer.CsvWriter;
 
 import java.util.*;
 
-/**
- * Main application class for parsing multiple RSS feeds
- */
 public class Main {
     private static final Map<String, Object> PARSERS = new HashMap<>();
 
@@ -33,7 +30,6 @@ public class Main {
             System.out.println("Total RSS feeds configured: " + RssFeedConfig.getTotalFeedCount());
             System.out.println("Mode: " + (website.equals("all") ? "All websites" : website));
             System.out.println("Output file: " + outputFilename);
-
             List<NewsItem> allNewsItems = parseWebsites(website);
 
             if (allNewsItems.isEmpty()) {
@@ -43,7 +39,6 @@ public class Main {
 
             CsvWriter csvWriter = new CsvWriter();
             csvWriter.writeToCsv(allNewsItems, outputFilename);
-
             System.out.println("\nSuccessfully saved " + allNewsItems.size() + " items to: " + outputFilename);
 
         } catch (Exception e) {
@@ -67,49 +62,38 @@ public class Main {
 
         if (website.equals("all")) {
             System.out.println("\nParsing all websites:");
-
             for (String siteName : RssFeedConfig.getAllWebsites()) {
                 System.out.println("\n[" + siteName.toUpperCase() + "]");
-
                 if (!PARSERS.containsKey(siteName)) {
                     System.err.println("No parser registered for: " + siteName);
                     System.err.println("Available parsers: " + String.join(", ", PARSERS.keySet()));
                     continue;
                 }
-
                 try {
                     Object parser = PARSERS.get(siteName);
                     List<NewsItem> items;
-
                     if (parser instanceof MultiFeedRssParser) {
-                        // For multiple RSS feed sites
                         items = ((MultiFeedRssParser) parser).parseAllFeeds();
                     } else if (parser instanceof BaseRssParser singleParser) {
-                        // For single RSS feed sites
                         System.out.print("Parsing main RSS feed...\n");
                         items = singleParser.parseRss();
                     } else {
                         System.err.println("Invalid parser type for " + siteName);
                         continue;
                     }
-
                     if (items != null && !items.isEmpty()) {
                         allNewsItems.addAll(items);
                     }
-
                 } catch (Exception e) {
                     System.err.println("Error: " + e.getMessage());
                 }
             }
         } else {
-            // Parse single website
             System.out.println("\nParsing " + website + ":");
-
             if (!PARSERS.containsKey(website)) {
                 System.err.println("No parser available for: " + website);
                 return allNewsItems;
             }
-
             try {
                 Object parser = PARSERS.get(website);
                 List<NewsItem> items;
@@ -128,7 +112,6 @@ public class Main {
                 if (items != null) {
                     allNewsItems.addAll(items);
                 }
-
             } catch (Exception e) {
                 System.err.println("Error: " + e.getMessage());
             }

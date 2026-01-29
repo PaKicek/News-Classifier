@@ -34,7 +34,6 @@ public class TassRssParser extends BaseRssParser {
                         throw new RuntimeException(e);
                     }
                 }
-
                 if (response.getEntity() == null) {
                     try {
                         throw new Exception("Empty response");

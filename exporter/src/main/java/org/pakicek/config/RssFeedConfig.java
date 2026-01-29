@@ -9,7 +9,6 @@ public class RssFeedConfig {
     private static final Map<String, List<String>> RSS_FEEDS = new HashMap<>();
 
     static {
-
         RSS_FEEDS.put("vedomosti", Arrays.asList(
                 "https://www.vedomosti.ru/rss/rubric/business",
                 "https://www.vedomosti.ru/rss/rubric/economics",
@@ -62,26 +61,15 @@ public class RssFeedConfig {
         RSS_FEEDS.putAll(lowerCaseMap);
     }
 
-    /**
-     * Get all RSS feeds for a website
-     */
     public static List<String> getFeedsForWebsite(String website) {
         return RSS_FEEDS.getOrDefault(website.toLowerCase(), Collections.emptyList());
     }
 
-    /**
-     * Get all available websites
-     */
     public static Set<String> getAllWebsites() {
         return RSS_FEEDS.keySet();
     }
 
-    /**
-     * Get total number of RSS feeds
-     */
     public static int getTotalFeedCount() {
-        return RSS_FEEDS.values().stream()
-                .mapToInt(List::size)
-                .sum();
+        return RSS_FEEDS.values().stream().mapToInt(List::size).sum();
     }
 }
