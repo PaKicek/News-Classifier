@@ -5,9 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
-/**
- * Represents a news item with all relevant metadata
- */
 public class NewsItem {
     private String website;
     private String title;
@@ -19,31 +16,27 @@ public class NewsItem {
     private Topic topic;
     private int relevance;
 
-    // Formatter for CSV date
-    private static final DateTimeFormatter ISO_FORMATTER =
-            DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private static final DateTimeFormatter ISO_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     // Topic weight multipliers (1.0 = neutral, >1.0 = more relevant, <1.0 = less relevant)
     private static final Map<Topic, Double> TOPIC_WEIGHTS;
 
     static {
-        // Using Map.ofEntries for more than 10 entries
         TOPIC_WEIGHTS = Map.ofEntries(
-                Map.entry(Topic.ECONOMICS, 1.4),           // Economics - highest relevance
-                Map.entry(Topic.SCIENCE_TECH, 1.3),        // Science and tech - high relevance
-                Map.entry(Topic.HEALTH, 1.2),              // Health - increased relevance
-                Map.entry(Topic.POLITICS, 1.1),            // Politics - slightly increased
-                Map.entry(Topic.SOCIETY, 1.0),             // Society - neutral
-                Map.entry(Topic.ACCIDENTS, 1.0),           // Accidents - neutral
-                Map.entry(Topic.CULTURE, 0.9),             // Culture - slightly less relevant
-                Map.entry(Topic.WEATHER, 0.9),             // Weather - slightly less relevant
-                Map.entry(Topic.TRAVELS, 0.8),             // Travels - less relevant
-                Map.entry(Topic.SPORT, 0.7),               // Sport - significantly less relevant
-                Map.entry(Topic.UNKNOWN, 1.0)              // Unknown topic - neutral
+                Map.entry(Topic.ECONOMICS, 1.4),
+                Map.entry(Topic.SCIENCE_TECH, 1.3),
+                Map.entry(Topic.HEALTH, 1.2),
+                Map.entry(Topic.POLITICS, 1.1),
+                Map.entry(Topic.SOCIETY, 1.0),
+                Map.entry(Topic.ACCIDENTS, 1.0),
+                Map.entry(Topic.CULTURE, 0.9),
+                Map.entry(Topic.WEATHER, 0.9),
+                Map.entry(Topic.TRAVELS, 0.8),
+                Map.entry(Topic.SPORT, 0.7),
+                Map.entry(Topic.UNKNOWN, 1.0)
         );
     }
 
-    // Time constants
     private static final int VERY_RECENT_HOURS = 1;
     private static final int RECENT_HOURS = 6;
     private static final int DAY_OLD_HOURS = 24;
@@ -55,7 +48,6 @@ public class NewsItem {
         this.website = "Unknown";
     }
 
-    // Getters and setters
     public String getWebsite() {
         return website != null ? website : "Unknown";
     }
@@ -119,10 +111,6 @@ public class NewsItem {
         return relevance;
     }
 
-    /**
-     * Get ISO formatted publication date for CSV
-     * @return ISO date string or empty string
-     */
     public String getIsoDate() {
         if (publicationDate == null) {
             return "";
@@ -130,9 +118,6 @@ public class NewsItem {
         return publicationDate.format(ISO_FORMATTER);
     }
 
-    /**
-     * Method to get data as string array for CSV
-     */
     public String[] toCsvRow() {
         return new String[] {
                 getWebsite(),
@@ -147,7 +132,6 @@ public class NewsItem {
         };
     }
 
-    // CSV escaping
     private String escapeCsv(String value) {
         if (value == null || value.isEmpty()) {
             return "";
@@ -158,7 +142,6 @@ public class NewsItem {
         return value;
     }
 
-    // Determine topic from category
     private void determineTopicFromCategory() {
         this.topic = Topic.determineFromString(title);
         if (this.topic == Topic.UNKNOWN) {
@@ -166,63 +149,38 @@ public class NewsItem {
         }
     }
 
-    /**
-     * Calculate relevance based on publication date and topic importance
-     * Relevance = time-based score * topic weight factor
-     */
     public void calculateRelevanceByDate() {
         int timeBasedScore = calculateTimeBasedScore();
-
-        // Apply topic weight to the time-based score
         this.relevance = applyTopicWeight(timeBasedScore);
     }
 
-    /**
-     * Calculate base relevance score based on publication date
-     * @return score from 1 to 5
-     */
     private int calculateTimeBasedScore() {
         if (publicationDate == null) {
-            return 3; // Default score if no date
-        }
-
-        long hoursDiff = ChronoUnit.HOURS.between(publicationDate, LocalDateTime.now());
-
-        // Determine relevance based on time difference
-        if (hoursDiff <= VERY_RECENT_HOURS) {      // Up to 1 hour - very fresh
-            return 5;
-        } else if (hoursDiff <= RECENT_HOURS) {    // 1-6 hours
-            return 4;
-        } else if (hoursDiff <= DAY_OLD_HOURS) {   // 6-24 hours
             return 3;
-        } else if (hoursDiff <= FEW_DAYS_HOURS) {  // 1-3 days
+        }
+        long hoursDiff = ChronoUnit.HOURS.between(publicationDate, LocalDateTime.now());
+        if (hoursDiff <= VERY_RECENT_HOURS) {
+            return 5;
+        } else if (hoursDiff <= RECENT_HOURS) {
+            return 4;
+        } else if (hoursDiff <= DAY_OLD_HOURS) {
+            return 3;
+        } else if (hoursDiff <= FEW_DAYS_HOURS) {
             return 2;
-        } else {                                   // More than 3 days
+        } else {
             return 1;
         }
     }
 
-    /**
-     * Apply topic weight multiplier to the base relevance score
-     * @param baseScore Base score (1-5) based on time
-     * @return Weighted score (1-5) after applying topic multiplier
-     */
     private int applyTopicWeight(int baseScore) {
         double weight = TOPIC_WEIGHTS.getOrDefault(this.topic, 1.0);
         double weightedScore = baseScore * weight;
-
-        // Ensure the result is between 1 and 5
         int finalScore = (int) Math.round(weightedScore);
         return Math.max(1, Math.min(5, finalScore));
     }
 
-    /**
-     * Check if this news item has all required fields
-     * @return true if it has title and link
-     */
     public boolean isValid() {
-        return getTitle() != null && !getTitle().isEmpty() &&
-                getLink() != null && !getLink().isEmpty();
+        return getTitle() != null && !getTitle().isEmpty() && getLink() != null && !getLink().isEmpty();
     }
 
     @Override

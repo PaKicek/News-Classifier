@@ -8,10 +8,6 @@ import org.pakicek.model.NewsItem;
 import org.pakicek.parser.BaseRssParser;
 import org.w3c.dom.Element;
 
-/**
- * Parser for Gazeta.ru RSS feed
- * URL: <a href="https://www.gazeta.ru/export/rss/first.xml">...</a>
- */
 public class GazetaRssParser extends BaseRssParser {
     private static final String RSS_URL = "https://www.gazeta.ru/export/rss/first.xml";
     private static final String WEBSITE_NAME = "Gazeta.ru";
@@ -24,8 +20,6 @@ public class GazetaRssParser extends BaseRssParser {
     protected String downloadRss() throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(rssUrl);
-
-            // Gazeta.ru requires proper headers
             request.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (HTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
             request.setHeader("Accept", "application/xml, text/xml, application/rss+xml, */*;q=0.9");
             request.setHeader("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
@@ -33,11 +27,8 @@ public class GazetaRssParser extends BaseRssParser {
 
             return httpClient.execute(request, response -> {
                 int statusCode = response.getCode();
-
                 if (statusCode != 200) {
                     String errorMessage = "HTTP " + statusCode + " for " + rssUrl;
-
-                    // Try to get error details
                     try {
                         if (response.getEntity() != null) {
                             String errorBody = EntityUtils.toString(response.getEntity());
@@ -47,7 +38,6 @@ public class GazetaRssParser extends BaseRssParser {
                             }
                         }
                     } catch (Exception ignored) {}
-
                     try {
                         throw new Exception(errorMessage);
                     } catch (Exception e) {
@@ -76,14 +66,12 @@ public class GazetaRssParser extends BaseRssParser {
             newsItem.setWebsite(WEBSITE_NAME);
             newsItem.setTitle(getElementText(itemElement, "title"));
 
-            // Gazeta.ru uses <author> tag
             String author = getElementText(itemElement, "author");
             if (author.isEmpty()) {
                 author = getElementTextWithNamespace(itemElement, "dc:creator");
             }
             newsItem.setAuthor(author);
 
-            // Publication date
             String pubDateStr = getElementText(itemElement, "pubDate");
             if (!pubDateStr.isEmpty()) {
                 newsItem.setPublicationDate(parseDate(pubDateStr));
@@ -92,14 +80,11 @@ public class GazetaRssParser extends BaseRssParser {
 
             newsItem.setLink(getElementText(itemElement, "link"));
 
-            // Category - Gazeta.ru uses <category> tag
             String category = getElementText(itemElement, "category");
             newsItem.setCategory(category);
 
-            // Image - Gazeta.ru uses enclosure with type="image/jpeg"
             String pictureLink = extractPictureLink(itemElement);
             if (pictureLink.isEmpty()) {
-                // Try media:content (sometimes used)
                 pictureLink = extractGazetaMediaContent(itemElement);
             }
             if (pictureLink.isEmpty()) {
@@ -115,11 +100,7 @@ public class GazetaRssParser extends BaseRssParser {
         }
     }
 
-    /**
-     * Extract image from Gazeta.ru specific media tags
-     */
     private String extractGazetaMediaContent(Element itemElement) {
-        // Check for <media:content> tags
         org.w3c.dom.NodeList mediaContents = itemElement.getElementsByTagName("media:content");
         for (int i = 0; i < mediaContents.getLength(); i++) {
             org.w3c.dom.Node node = mediaContents.item(i);
@@ -127,14 +108,11 @@ public class GazetaRssParser extends BaseRssParser {
                 org.w3c.dom.Element mediaElement = (org.w3c.dom.Element) node;
                 String type = mediaElement.getAttribute("type");
                 String url = mediaElement.getAttribute("url");
-
                 if (type.startsWith("image/") && !url.isEmpty()) {
                     return url;
                 }
             }
         }
-
-        // Check for <enclosure> with image
         return extractPictureLink(itemElement);
     }
 }

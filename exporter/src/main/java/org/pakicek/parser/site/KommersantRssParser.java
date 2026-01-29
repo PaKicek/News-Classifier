@@ -8,9 +8,6 @@ import org.pakicek.model.NewsItem;
 import org.pakicek.parser.BaseRssParser;
 import org.w3c.dom.Element;
 
-/**
- * Parser for Kommersant RSS feed
- */
 public class KommersantRssParser extends BaseRssParser {
     private static final String RSS_URL = "https://www.kommersant.ru/rss/news.xml";
     private static final String WEBSITE_NAME = "Kommersant";
@@ -34,7 +31,6 @@ public class KommersantRssParser extends BaseRssParser {
                         throw new RuntimeException(e);
                     }
                 }
-
                 if (response.getEntity() == null) {
                     try {
                         throw new Exception("Empty response");
