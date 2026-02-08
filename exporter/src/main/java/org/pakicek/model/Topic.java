@@ -3,16 +3,11 @@ package org.pakicek.model;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Enum representing news topics/categories
- */
 public enum Topic {
     POLITICS("Politics",
             Arrays.asList("полити", "politics", "politic", "государств", "government",
-                    "власть", "power", "правительств", "administration", "выбор",
-                    "elections", "election", "парламент", "parliament", "президент",
-                    "president", "senate", "congress", "diplomacy", "foreign policy",
-                    "росси", "украин", "сша", "russia", "ukrain", "usa",
+                    "власть", "power", "правительств", "administration", "выбор", "elections", "election", "парламент", "parliament", "президент",
+                    "president", "senate", "congress", "diplomacy", "foreign policy", "росси", "украин", "сша", "russia", "ukrain", "usa",
                     "кремл", "kremlin", "путин", "putin", "лавр", "lavrov", "госдум", "песков", "peskov",
                     "сво", "nato", "нато", "мид", "санкц", "санкт", "саммит", "summit", "форум",
                     "встреч", "meeting", "переговор", "talks", "диплома", "международ", "international",
@@ -44,10 +39,8 @@ public enum Topic {
                     "роялти", "royalty", "ноу-хау", "know-how", "нематериальн", "intangible")),
 
     SOCIETY("Society",
-            Arrays.asList("общество", "society", "социальн", "social", "люди",
-                    "people", "семья", "family", "образовани", "education",
-                    "дети", "children", "пенси", "pension", "community",
-                    "demographics", "population", "welfare", "social issues",
+            Arrays.asList("общество", "society", "социальн", "social", "люди", "people", "семья", "family", "образовани", "education",
+                    "дети", "children", "пенси", "pension", "community", "demographics", "population", "welfare", "social issues",
                     "вуз", "university", "студент", "student", "школ", "school", "учител", "teacher", "абитуриент", "entrant",
                     "поступлен", "admission", "стипенд", "scholarship", "грант", "grant", "академ", "academic",
                     "молодеж", "youth", "подросток", "teenager", "рождаемость", "birth rate", "смертность", "mortality",
@@ -64,10 +57,8 @@ public enum Topic {
                     "инициатив", "initiative", "петиц", "petition", "референдум", "referendum", "опрос", "poll", "опросник", "questionnaire")),
 
     ACCIDENTS("Accidents",
-            Arrays.asList("происшестви", "accidents", "accident", "emergency",
-                    "авари", "crash", "преступлени", "crime", "criminal",
-                    "пожар", "fire", "дтп", "traffic accident", "катастроф",
-                    "disaster", "catastrophe", "emergency", "rescue",
+            Arrays.asList("происшестви", "accidents", "accident", "emergency", "авари", "crash", "преступлени", "crime", "criminal",
+                    "пожар", "fire", "дтп", "traffic accident", "катастроф", "disaster", "catastrophe", "emergency", "rescue",
                     "взрыв", "explosion", "blast", "стрельб", "shooting", "насил", "violence", "убийств", "murder",
                     "ограблен", "robbery", "краж", "theft", "вымогательств", "extortion", "вымога", "extort",
                     "вымогал", "blackmail", "шантаж", "blackmail", "похищен", "abduction", "kidnapping", "захват", "capture",
@@ -82,10 +73,8 @@ public enum Topic {
                     "санитарн", "sanitary", "эпидемиолог", "epidemiologist", "вирусолог", "virologist", "инфекц", "infection")),
 
     SPORT("Sport",
-            Arrays.asList("футбол", "football",
-                    "хоккей", "hockey", "олимпиад", "олимпийск", "olympics", "соревновани",
-                    "competition", "чемпионат", "championship", "матч", "match",
-                    "game", "basketball", "tennis", "athletics", "athlete",
+            Arrays.asList("футбол", "football", "хоккей", "hockey", "олимпиад", "олимпийск", "olympics", "соревновани",
+                    "competition", "чемпионат", "championship", "матч", "match", "game", "basketball", "tennis", "athletics", "athlete",
                     "спорт", "sport", "спортсмен", "sportsman", "athlete", "тренер", "coach", "команд", "team",
                     "лига", "league", "кубок", "cup", "турнир", "tournament", "плей-офф", "playoff", "финал", "final",
                     "полуфинал", "semifinal", "четвертьфинал", "quarterfinal", "групповой этап", "group stage",
@@ -101,10 +90,8 @@ public enum Topic {
                     "спортивн", "sports", "физподготовк", "physical training", "реабилитац", "rehabilitation", "восстановлен", "recovery")),
 
     SCIENCE_TECH("Science and tech",
-            Arrays.asList("наук", "научн", "science", "scientific", "технологи", "technology",
-                    "tech", "it", "information technology", "космос", "space",
-                    "инноваци", "innovation", "исследовани", "research", "discovery",
-                    "artificial intelligence", "ai", "machine learning", "robotics",
+            Arrays.asList("наук", "научн", "science", "scientific", "технологи", "technology", "tech", "it", "information technology", "космос", "space",
+                    "инноваци", "innovation", "исследовани", "research", "discovery", "artificial intelligence", "ai", "machine learning", "robotics",
                     "computer", "software", "hardware", "internet", "digital", "учены", "учёны", "scientist",
                     "ии", "ai", "робот", "robot", "кибер", "cyber", "данн", "data", "big data", "большие данные",
                     "алгоритм", "algorithm", "программ", "software", "приложен", "application", "app", "дев", "dev", "developer",
@@ -122,10 +109,8 @@ public enum Topic {
                     "открыт", "discovery", "патент", "patent", "изобретен", "invention", "интеллектуальн", "intellectual", "ip", "ip")),
 
     CULTURE("Culture",
-            Arrays.asList("культур", "culture", "cultural", "искусств", "art",
-                    "кино", "cinema", "movie", "фильм", "film", "музык", "music",
-                    "театр", "theater", "theatre", "литератур", "literature",
-                    "выставк", "exhibition", "музе", "museum", "heritage",
+            Arrays.asList("культур", "culture", "cultural", "искусств", "art", "кино", "cinema", "movie", "фильм", "film", "музык", "music",
+                    "театр", "theater", "theatre", "литератур", "literature", "выставк", "exhibition", "музе", "museum", "heritage",
                     "арт", "art", "худож", "artist", "скульптур", "sculpture", "живопис", "painting", "рисун", "drawing",
                     "граффити", "graffiti", "перформанс", "performance", "инсталляц", "installation", "коллекц", "collection",
                     "галере", "gallery", "вернисаж", "vernissage", "презентац", "presentation", "шоу", "show", "концерт", "concert",
@@ -143,10 +128,8 @@ public enum Topic {
 
     HEALTH("Health",
             Arrays.asList("здоров", "health", "healthcare", "медицин", "medicine",
-                    "medical", "болезн", "disease", "illness", "лечени", "treatment",
-                    "врачи", "doctors", "physician", "больниц", "hospital",
-                    "клиник", "clinic", "вирус", "virus", "pandemic", "epidemic",
-                    "vaccine", "vaccination", "pharmacy", "drug",
+                    "medical", "болезн", "disease", "illness", "лечени", "treatment", "врачи", "doctors", "physician", "больниц", "hospital",
+                    "клиник", "clinic", "вирус", "virus", "pandemic", "epidemic", "vaccine", "vaccination", "pharmacy", "drug",
                     "здравоохран", "healthcare", "медик", "medic", "хирург", "surgeon", "терапевт", "therapist", "педиатр", "pediatrician",
                     "стоматолог", "dentist", "офтальмолог", "ophthalmologist", "кардиолог", "cardiologist", "онколог", "oncologist",
                     "невролог", "neurologist", "психиатр", "psychiatrist", "психолог", "psychologist", "психотерапевт", "psychotherapist",
@@ -167,10 +150,8 @@ public enum Topic {
                     "фитнес", "fitness", "йог", "yoga", "медитац", "meditation", "релаксац", "relaxation", "детокс", "detox", "очищен", "cleansing")),
 
     TRAVELS("Travels and tourism",
-            Arrays.asList("туризм", "турист", "tourism", "travel", "travel", "путешестви",
-                    "journey", "отдых", "vacation", "holiday", "курорт", "resort",
-                    "отели", "hotels", "hotel", "отпуск", "leave", "экскурси",
-                    "excursion", "tour", "trip", "destination", "airline",
+            Arrays.asList("туризм", "турист", "tourism", "travel", "travel", "путешестви", "journey", "отдых", "vacation", "holiday", "курорт", "resort",
+                    "отели", "hotels", "hotel", "отпуск", "leave", "экскурси", "excursion", "tour", "trip", "destination", "airline",
                     "авиаперевоз", "air transportation", "авиакомпания", "airline", "аэропорт", "airport", "рейс", "flight",
                     "билет", "ticket", "бронь", "booking", "резервирован", "reservation", "поездк", "trip", "вояж", "voyage",
                     "пассажир", "passenger", "багаж", "luggage", "чемодан", "suitcase", "рюкзак", "backpack", "дорожн", "travel",
@@ -190,10 +171,8 @@ public enum Topic {
 
     WEATHER("Weather",
             Arrays.asList("погод", "weather", "климат", "climate", "природ",
-                    "nature", "экологи", "ecology", "environment", "катаклизм",
-                    "cataclysm", "наводнени", "flood", "flooding", "землетрясени",
-                    "earthquake", "storm", "hurricane", "typhoon", "temperature",
-                    "forecast", "global warming", "climate change",
+                    "nature", "экологи", "ecology", "environment", "катаклизм", "cataclysm", "наводнени", "flood", "flooding", "землетрясени",
+                    "earthquake", "storm", "hurricane", "typhoon", "temperature", "forecast", "global warming", "climate change",
                     "метеоролог", "meteorology", "метео", "meteo", "синоптик", "weather forecaster", "прогноз", "forecast",
                     "осадк", "precipitation", "дожд", "rain", "снег", "snow", "град", "hail", "иней", "frost", "измороз", "hoarfrost",
                     "туман", "fog", "мгл", "haze", "облачн", "cloud", "ясн", "clear", "солнечн", "sunny", "пасмурн", "cloudy",
@@ -220,16 +199,10 @@ public enum Topic {
         this.keywords = keywords;
     }
 
-    /**
-     * Get display name for the topic
-     */
     public String getDisplayName() {
         return displayName;
     }
 
-    /**
-     * Try to determine topic from string
-     */
     public static Topic determineFromString(String string) {
         if (string == null || string.isEmpty()) {
             return UNKNOWN;
@@ -237,7 +210,6 @@ public enum Topic {
 
         String lowerString = string.toLowerCase();
 
-        // Check each topic's keywords
         for (Topic topic : values()) {
             if (topic == UNKNOWN) continue;
 

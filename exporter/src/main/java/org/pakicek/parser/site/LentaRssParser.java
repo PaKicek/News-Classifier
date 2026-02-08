@@ -66,7 +66,6 @@ public class LentaRssParser extends MultiFeedRssParser {
 
             newsItem.setLink(getElementText(itemElement, "link"));
 
-            // Lenta categories
             String category = getElementText(itemElement, "category");
             if (category.isEmpty()) {
                 category = extractLentaCategoryFromUrl();

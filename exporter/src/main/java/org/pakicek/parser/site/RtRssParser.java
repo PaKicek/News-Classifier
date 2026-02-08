@@ -8,9 +8,6 @@ import org.pakicek.model.NewsItem;
 import org.pakicek.parser.MultiFeedRssParser;
 import org.w3c.dom.Element;
 
-/**
- * Parser for RT RSS feeds (multiple categories)
- */
 public class RtRssParser extends MultiFeedRssParser {
 
     public RtRssParser() {
@@ -66,14 +63,12 @@ public class RtRssParser extends MultiFeedRssParser {
 
             newsItem.setLink(getElementText(itemElement, "link"));
 
-            // RT categories
             String category = getElementText(itemElement, "category");
             if (category.isEmpty()) {
                 category = extractRtCategoryFromUrl();
             }
             newsItem.setCategory(category);
 
-            // RT uses media:content for images
             String pictureLink = extractRtMediaContent(itemElement);
             if (pictureLink.isEmpty()) {
                 pictureLink = extractPictureLink(itemElement);
@@ -95,7 +90,6 @@ public class RtRssParser extends MultiFeedRssParser {
         if (rssUrl.contains("/rss/")) {
             String path = rssUrl.substring(rssUrl.indexOf("/rss/") + 5);
             if (path.endsWith("/")) path = path.substring(0, path.length() - 1);
-
             return switch (path) {
                 case "news" -> "Новости";
                 case "russia" -> "Россия";
